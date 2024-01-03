@@ -20,7 +20,7 @@
           pname = "glxgears";
           inherit version;
           src = ./.;
-          nativeBuildInputs = [ clang xorg.libX11 libGL xorg.libXrender ];
+          nativeBuildInputs = [ xorg.libX11 libGL xorg.libXrender ];
           dontConfigure = true;
           buildPhase = ''
             $CC src/xdemos/glxgears.c -o glxgears -lGL -lX11 -lm -lXrender
@@ -31,7 +31,7 @@
           pname = "glxinfo";
           inherit version;
           src = ./.;
-          nativeBuildInputs = [ clang xorg.libX11 libGL xorg.libXrender ];
+          nativeBuildInputs = [ xorg.libX11 libGL xorg.libXrender ];
           dontConfigure = true;
           buildPhase = ''
             $CC src/xdemos/{glxinfo.c,glinfo_common.c} -o glxinfo -lGL -lX11
