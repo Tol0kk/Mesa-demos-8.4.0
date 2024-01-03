@@ -27,7 +27,6 @@
           '';
           installPhase = "mkdir -p $out/bin; cp -r glxgears $out/bin/.";
         };
-
       };
 
       packages = forAllSystems (system:
@@ -48,7 +47,8 @@
               {
                 packages = with pkgs; [
                   xorg.libX11
-                  xorg_sys_opengl
+                  xorg.libXrender
+                  xorg.libXext
                   libGL
                   bear # Use to generate compile_commands.json for clangd 
                   gdb # Debug utility
