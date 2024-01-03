@@ -20,18 +20,30 @@
           pname = "glxgears";
           inherit version;
           src = ./.;
-          nativeBuildInputs = [ clang xorg.libX11 libGL ];
+          nativeBuildInputs = [ clang xorg.libX11 libGL xorg.libXrender ];
           dontConfigure = true;
           buildPhase = ''
-            $CC src/xdemos/glxgears.c -o glxgears -lGL -lX11 -lm
+            $CC src/xdemos/glxgears.c -o glxgears -lGL -lX11 -lm -lXrender
           '';
-          installPhase = "mkdir -p $out/bin; cp -r glxgears $out/bin/.";
+          installPhase = " install -Dm 555 -t $out/bin glxgears";
+        };
+        glxinfo = with final; stdenv.mkDerivation rec {
+          pname = "glxinfo";
+          inherit version;
+          src = ./.;
+          nativeBuildInputs = [ clang xorg.libX11 libGL xorg.libXrender ];
+          dontConfigure = true;
+          buildPhase = ''
+            $CC src/xdemos/{glxinfo.c,glinfo_common.c} -o glxinfo -lGL -lX11
+          '';
+          installPhase = " install -Dm 555 -t $out/bin glxinfo";
         };
       };
 
       packages = forAllSystems (system:
         {
           inherit (nixpkgsFor.${system}) glxgears;
+          inherit (nixpkgsFor.${system}) glxinfo;
         });
 
       devShells = forAllSystems
