@@ -1,5 +1,5 @@
 {
-  inputs.nixpkgs.url = "nixpkgs/nixos-23.11";
+  inputs.nixpkgs.url = "nixpkgs/nixos-23.05";
   outputs = { self, nixpkgs }:
     let
       lastModifiedDate = self.lastModifiedDate or self.lastModified or "19700101";
